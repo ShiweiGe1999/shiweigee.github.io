@@ -130,7 +130,7 @@ function App() {
     threshold: 0.5,
   });
   const [projectRef, projectInView] = useInView({
-    threshold: 0.5,
+    threshold: 0.2,
   });
   const toggleMode = React.useCallback(() => {
     setDarkMode((prev) => !prev);
@@ -145,6 +145,9 @@ function App() {
         secondary: {
           main: '#f50057',
         },
+      },
+      typography: {
+        fontFamily: 'Open Sans, sans-serif',
       },
     }),
     [darkMode],
@@ -505,9 +508,11 @@ function App() {
         <Box
           id="project"
           sx={{
-            height: '100vh',
+            minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
+            pt: 10,
+            pb: 10,
             px: isMobile ? '1rem' : '3rem',
           }}
           ref={projectRef}
