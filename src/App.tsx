@@ -1,49 +1,43 @@
-import React, { useEffect } from 'react';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import MenuIcon from '@mui/icons-material/Menu';
+import Timeline from '@mui/lab/Timeline';
+import TimelineConnector from '@mui/lab/TimelineConnector';
+import TimelineContent from '@mui/lab/TimelineContent';
+import TimelineItem from '@mui/lab/TimelineItem';
+import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
+import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import {
-  createTheme,
-  ThemeProvider,
-  responsiveFontSizes,
-  Theme,
-} from '@mui/material/styles';
-import {
-  ThemeOptions,
-  Grid,
-  useMediaQuery,
-  CssBaseline,
-  Divider,
   Avatar,
-  CardActionArea,
+  CardActionArea, CssBaseline,
+  Divider, Grid, ThemeOptions, useMediaQuery,
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import Brightness4Icon from '@mui/icons-material/Brightness4';
-import Brightness7Icon from '@mui/icons-material/Brightness7';
-import { useInView } from 'react-intersection-observer';
-import Scroll from 'react-scroll';
-import './App.css';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import Grow from '@mui/material/Grow';
-import Timeline from '@mui/lab/Timeline';
-import TimelineItem from '@mui/lab/TimelineItem';
-import TimelineSeparator from '@mui/lab/TimelineSeparator';
-import TimelineConnector from '@mui/lab/TimelineConnector';
-import TimelineContent from '@mui/lab/TimelineContent';
-import TimelineDot from '@mui/lab/TimelineDot';
-import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
-import PropTypes from 'prop-types';
+import Drawer from '@mui/material/Drawer';
+import Fab from '@mui/material/Fab';
+import Grow from '@mui/material/Grow';
+import IconButton from '@mui/material/IconButton';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import {
+  createTheme, responsiveFontSizes, ThemeProvider,
+} from '@mui/material/styles';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
 import useScrollTrigger from '@mui/material/useScrollTrigger';
 import Zoom from '@mui/material/Zoom';
-import Fab from '@mui/material/Fab';
-import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import PropTypes from 'prop-types';
+import React from 'react';
+import { useInView } from 'react-intersection-observer';
+import './App.css';
 
 const projects = [
   {
@@ -54,9 +48,9 @@ const projects = [
     url: 'https://fall-2021-social-network.herokuapp.com/',
   },
   {
-    title: 'Car Trader(Mock Car max)',
+    title: 'Car Trader (Mock Car max)',
     content:
-      'next.js application, programmed in Typescript. User can upload their car information like Craiglist to sell their cars on website.  ',
+      'Next.js application, programmed in Typescript. User can upload their car information like Craiglist to sell their cars on website.  ',
     media: 'cartrader.png',
     url: 'https://github.com/ShiweiGe1999/cartrader',
   },
@@ -125,6 +119,13 @@ ScrollTop.defaultProps = {
 
 function App() {
   const [darkMode, setDarkMode] = React.useState(false);
+  const [openDrawer, setOpenDrawer] = React.useState(false);
+  const onOpenDrawer = () => {
+    setOpenDrawer(true);
+  };
+  const onCloseDrawer = () => {
+    setOpenDrawer(false);
+  };
   const [aboutRef, aboutInView] = useInView({ threshold: 0.5 });
   const [experienceRef, experienceInView] = useInView({
     threshold: 0.5,
@@ -157,6 +158,28 @@ function App() {
     [darkMode],
   );
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const list = () => (
+    <Box
+      sx={{ width: 250 }}
+      role="presentation"
+      onClick={onCloseDrawer}
+      onKeyDown={onCloseDrawer}
+    >
+      <List>
+        {['about', 'experience', 'project'].map((text) => (
+          <a
+            href={`#${text}`}
+            style={{ textDecoration: 'inherit', color: 'inherit' }}
+            key={text}
+          >
+            <ListItem button>
+              <ListItemText primary={text} />
+            </ListItem>
+          </a>
+        ))}
+      </List>
+    </Box>
+  );
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -169,17 +192,20 @@ function App() {
               alignItems: 'center',
             }}
           >
-            <IconButton size="large" onClick={toggleMode}>
-              {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
-            </IconButton>
             <IconButton
               size="large"
-              edge="start"
               color="inherit"
-              aria-label="menu"
+              id="basic-button"
+              onClick={onOpenDrawer}
             >
               <MenuIcon />
             </IconButton>
+            <IconButton size="large" onClick={toggleMode}>
+              {darkMode ? <Brightness7Icon /> : <Brightness4Icon />}
+            </IconButton>
+            <Drawer anchor="right" open={openDrawer} onClose={onCloseDrawer}>
+              {list()}
+            </Drawer>
           </Toolbar>
         </AppBar>
       )}
@@ -190,17 +216,19 @@ function App() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
-            bgcolor: 'primary.main',
+            minHeight: '100vh',
+            bgcolor: !darkMode ? 'primary.main' : 'rgba(255,255,255,0.09)',
             minWidth: '17rem',
             color: 'inherit',
             position: 'fixed',
             top: 0,
             left: 0,
+            pt: 10,
+            pb: 10,
           }}
         >
           <Avatar
-            src="./avatar.JPG"
+            src="./avatarme.JPEG"
             sx={{ width: '160px', height: '150px', mb: 2 }}
           />
           <Typography
@@ -276,15 +304,17 @@ function App() {
         <Box
           id="about"
           sx={{
-            height: '100vh',
+            minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
             px: isMobile ? '1rem' : '3rem',
+            pt: 10,
+            pb: 10,
           }}
           ref={aboutRef}
         >
           <Box>
-            <Grow in={aboutInView}>
+            <Grow in={!isMobile ? aboutInView : true}>
               <Typography variant="h1" sx={{ textTransform: 'uppercase' }}>
                 <span style={{ color: theme.palette.info.light }}>Shiwei</span>
                 {' '}
@@ -292,7 +322,7 @@ function App() {
               </Typography>
             </Grow>
             <Grow
-              in={aboutInView}
+              in={!isMobile ? aboutInView : true}
               style={{ transformOrigin: '0 0 0' }}
               {...(aboutInView ? { timeout: 700 } : {})}
             >
@@ -315,7 +345,7 @@ function App() {
               </Typography>
             </Grow>
             <Grow
-              in={aboutInView}
+              in={!isMobile ? aboutInView : true}
               style={{ transformOrigin: '0 0 0' }}
               {...(aboutInView ? { timeout: 1400 } : {})}
             >
@@ -328,7 +358,27 @@ function App() {
               </Typography>
             </Grow>
             <Grow
-              in={aboutInView}
+              in={!isMobile ? aboutInView : true}
+              style={{ transformOrigin: '0 0 0' }}
+              {...(aboutInView ? { timeout: 2000 } : {})}
+            >
+              <Typography
+                color="primary.light"
+                variant="h6"
+                sx={{ width: isMobile ? '100%' : '70%', mb: 2 }}
+              >
+                Hi, My name is Shiwei Ge, I am enthusiastic about Typescript and
+                Javascript development and curious about learning the newest
+                technology &#9997;. My favorite and most proficient frameworks
+                are React, Material UI, TailwindCSS, Redux, Express.js, Next.js.
+                In my spare time, I&apos;d like to chill out alone playing some
+                videos games and be an Eboy &#127749;. I am currently trying my
+                best to connect people! Come on and follow me on GitHub or
+                Linkindin. Thanks &#10084;!
+              </Typography>
+            </Grow>
+            <Grow
+              in={!isMobile ? aboutInView : true}
               style={{ transformOrigin: '0 0 0' }}
               {...(aboutInView ? { timeout: 2000 } : {})}
             >
@@ -363,146 +413,151 @@ function App() {
         <Box
           id="experience"
           sx={{
-            height: '100vh',
+            minHeight: '100vh',
             display: 'flex',
             alignItems: 'center',
             px: isMobile ? '1rem' : '3rem',
           }}
           ref={experienceRef}
         >
-          <Box>
-            <Typography sx={{ color: 'primary.main', mb: 2 }} variant="h5">
-              Experience
-            </Typography>
-            <Timeline position="alternate" sx={{ minWidth: '870px' }}>
-              <Grow in={experienceInView} style={{ transformOrigin: '0 0 0' }}>
-                <TimelineItem>
-                  <TimelineOppositeContent
-                    sx={{ m: 'auto 0' }}
-                    align="right"
-                    variant="body2"
-                    color="text.secondary"
-                  >
-                    2021 - Present
-                  </TimelineOppositeContent>
-                  <TimelineSeparator>
-                    <TimelineConnector />
-                    <img
-                      alt="fl"
-                      src="penn.jpg"
-                      style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                    />
-                    <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent sx={{ py: '12px', px: 2 }}>
-                    <Typography variant="h6" component="span">
-                      University of Pennsylvania
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}>
-                      Master of Science in Mechanical Engineering
-                    </Typography>
-                  </TimelineContent>
-                </TimelineItem>
-              </Grow>
-              <Grow
-                in={experienceInView}
-                style={{ transformOrigin: '0 0 0' }}
-                {...(experienceInView ? { timeout: 700 } : {})}
-              >
-                <TimelineItem>
-                  <TimelineOppositeContent
-                    sx={{ m: 'auto 0' }}
-                    variant="body2"
-                    color="text.secondary"
-                  >
-                    2022/01 - 2022/05
-                  </TimelineOppositeContent>
-                  <TimelineSeparator>
-                    <TimelineConnector />
-                    <img
-                      alt="fl"
-                      src="penn.jpg"
-                      style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                    />
-                    <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent sx={{ py: '12px', px: 2 }}>
-                    <Typography variant="h6" component="span">
-                      Teaching Assistant
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}>
-                      CIS350 Software Engineering
-                      {' '}
-                    </Typography>
-                  </TimelineContent>
-                </TimelineItem>
-              </Grow>
-              <Grow
-                in={experienceInView}
-                style={{ transformOrigin: '0 0 0' }}
-                {...(experienceInView ? { timeout: 1400 } : {})}
-              >
-                <TimelineItem>
-                  <TimelineOppositeContent
-                    sx={{ m: 'auto 0' }}
-                    color="text.secondary"
-                  >
-                    2019 - 2021
-                  </TimelineOppositeContent>
-                  <TimelineSeparator>
-                    <TimelineConnector sx={{}} />
-                    <img
-                      alt="fl"
-                      src="Florida.jpg"
-                      style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                    />
-                    <TimelineConnector />
-                  </TimelineSeparator>
-                  <TimelineContent sx={{ py: '12px', px: 2 }}>
-                    <Typography variant="h6" component="span">
-                      Florida Institute of Technology
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}>
-                      Bachelor of Science in Mechanical Engineering
-                    </Typography>
-                  </TimelineContent>
-                </TimelineItem>
-              </Grow>
-              <Grow
-                in={experienceInView}
-                style={{ transformOrigin: '0 0 0' }}
-                {...(experienceInView ? { timeout: 2000 } : {})}
-              >
-                <TimelineItem>
-                  <TimelineOppositeContent
-                    sx={{ m: 'auto 0' }}
-                    align="right"
-                    variant="body2"
-                    color="text.secondary"
-                  >
-                    2017 - 2019
-                  </TimelineOppositeContent>
-                  <TimelineSeparator>
-                    <TimelineConnector />
-                    <img
-                      alt="fl"
-                      src="wit.jpg"
-                      style={{ marginTop: '1rem', marginBottom: '1rem' }}
-                    />
-                    <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
-                  </TimelineSeparator>
-                  <TimelineContent sx={{ py: '12px', px: 2 }}>
-                    <Typography variant="h6" component="span">
-                      Wuhan Institute of Technology
-                    </Typography>
-                    <Typography sx={{ color: 'text.secondary' }}>
-                      Bachelor of Science in Energy and Power
-                    </Typography>
-                  </TimelineContent>
-                </TimelineItem>
-              </Grow>
-            </Timeline>
-          </Box>
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography sx={{ color: 'primary.main', mb: 2 }} variant="h5">
+                Experience
+              </Typography>
+              <Timeline position="alternate" sx={{ width: '100%' }}>
+                <Grow
+                  in={!isMobile ? experienceInView : true}
+                  style={{ transformOrigin: '0 0 0' }}
+                >
+                  <TimelineItem>
+                    <TimelineOppositeContent
+                      sx={{ m: 'auto 0' }}
+                      align="right"
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      2021 - Present
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineConnector />
+                      <img
+                        alt="fl"
+                        src="penn.jpg"
+                        style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                      />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ py: '12px', px: 2 }}>
+                      <Typography variant="h6" component="span">
+                        University of Pennsylvania
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary' }}>
+                        Master of Science in Mechanical Engineering
+                      </Typography>
+                    </TimelineContent>
+                  </TimelineItem>
+                </Grow>
+                <Grow
+                  in={!isMobile ? experienceInView : true}
+                  style={{ transformOrigin: '0 0 0' }}
+                  {...(experienceInView ? { timeout: 700 } : {})}
+                >
+                  <TimelineItem>
+                    <TimelineOppositeContent
+                      sx={{ m: 'auto 0' }}
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      2022/01 - 2022/05
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineConnector />
+                      <img
+                        alt="fl"
+                        src="penn.jpg"
+                        style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                      />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ py: '12px', px: 2 }}>
+                      <Typography variant="h6" component="span">
+                        Teaching Assistant
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary' }}>
+                        CIS350 Software Engineering
+                        {' '}
+                      </Typography>
+                    </TimelineContent>
+                  </TimelineItem>
+                </Grow>
+                <Grow
+                  in={!isMobile ? experienceInView : true}
+                  style={{ transformOrigin: '0 0 0' }}
+                  {...(experienceInView ? { timeout: 1400 } : {})}
+                >
+                  <TimelineItem>
+                    <TimelineOppositeContent
+                      sx={{ m: 'auto 0' }}
+                      color="text.secondary"
+                    >
+                      2019 - 2021
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineConnector sx={{}} />
+                      <img
+                        alt="fl"
+                        src="Florida.jpg"
+                        style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                      />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ py: '12px', px: 2 }}>
+                      <Typography variant="h6" component="span">
+                        Florida Institute of Technology
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary' }}>
+                        Bachelor of Science in Mechanical Engineering
+                      </Typography>
+                    </TimelineContent>
+                  </TimelineItem>
+                </Grow>
+                <Grow
+                  in={!isMobile ? experienceInView : true}
+                  style={{ transformOrigin: '0 0 0' }}
+                  {...(experienceInView ? { timeout: 2000 } : {})}
+                >
+                  <TimelineItem>
+                    <TimelineOppositeContent
+                      sx={{ m: 'auto 0' }}
+                      align="right"
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      2017 - 2019
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineConnector />
+                      <img
+                        alt="fl"
+                        src="wit.jpg"
+                        style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                      />
+                      <TimelineConnector sx={{ bgcolor: 'secondary.main' }} />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ py: '12px', px: 2 }}>
+                      <Typography variant="h6" component="span">
+                        Wuhan Institute of Technology
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary' }}>
+                        Bachelor of Science in Energy and Power
+                      </Typography>
+                    </TimelineContent>
+                  </TimelineItem>
+                </Grow>
+              </Timeline>
+            </Grid>
+          </Grid>
         </Box>
         <Divider />
         <Box
@@ -521,45 +576,44 @@ function App() {
             <Typography sx={{ color: 'primary.main', mb: 2 }} variant="h5">
               Project
             </Typography>
-            <Box
-              sx={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: 4,
-              }}
-            >
+            <Grid container spacing={2}>
               {projects.map((v, i) => (
-                <Grow
-                  in={projectInView}
-                  style={{ transformOrigin: '0 0 0' }}
-                  {...(projectInView ? { timeout: i * 700 } : {})}
-                  key={v.title}
-                >
-                  <Card sx={{ width: '400px' }}>
-                    <a
-                      style={{ color: 'inherit', textDecoration: 'inherit' }}
-                      href={v.url}
-                    >
-                      <CardActionArea>
-                        <CardMedia
-                          component="img"
-                          image={v.media}
-                          alt={v.title}
-                        />
-                        <CardContent>
-                          <Typography gutterBottom variant="h5" component="div">
-                            {v.title}
-                          </Typography>
-                          <Typography variant="body2" color="text.secondary">
-                            {v.content}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </a>
-                  </Card>
-                </Grow>
+                <Grid item xs={12} md={6} xl={5} key={v.title}>
+                  <Grow
+                    in={!isMobile ? projectInView : true}
+                    style={{ transformOrigin: '0 0 0' }}
+                    {...(projectInView ? { timeout: i * 700 } : {})}
+                  >
+                    <Card sx={{ height: '100%' }}>
+                      <a
+                        style={{ color: 'inherit', textDecoration: 'inherit' }}
+                        href={v.url}
+                      >
+                        <CardActionArea>
+                          <CardMedia
+                            component="img"
+                            image={v.media}
+                            alt={v.title}
+                          />
+                          <CardContent>
+                            <Typography
+                              gutterBottom
+                              variant="h5"
+                              component="div"
+                            >
+                              {v.title}
+                            </Typography>
+                            <Typography variant="body2" color="text.secondary">
+                              {v.content}
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </a>
+                    </Card>
+                  </Grow>
+                </Grid>
               ))}
-            </Box>
+            </Grid>
           </Box>
         </Box>
         <Divider />
