@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.0073030a.css","mappings":"AAAA,KACE,sBACF,CAEA,MACE,gCACF","sources":["App.css"],"sourcesContent":["html {\r\n  scroll-behavior: smooth;\r\n}\r\n\r\n.font {\r\n  font-family: 'Open Sans', sans-serif;\r\n}"],"names":[],"sourceRoot":""}
