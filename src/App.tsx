@@ -12,8 +12,12 @@ import TimelineOppositeContent from '@mui/lab/TimelineOppositeContent';
 import TimelineSeparator from '@mui/lab/TimelineSeparator';
 import {
   Avatar,
-  CardActionArea, CssBaseline,
-  Divider, Grid, ThemeOptions, useMediaQuery,
+  CardActionArea,
+  CssBaseline,
+  Divider,
+  Grid,
+  ThemeOptions,
+  useMediaQuery,
 } from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -28,7 +32,9 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import {
-  createTheme, responsiveFontSizes, ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+  ThemeProvider,
 } from '@mui/material/styles';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -55,11 +61,26 @@ const projects = [
     url: 'https://github.com/ShiweiGe1999/cartrader',
   },
   {
+    title:
+      'Predictive Analysis of Cryptocurrency Trading with Crypto History Data',
+    content:
+      'Collecting 32 GB of Cryptocurrency Data from Kaggle doing predictive analysis on the profit in next five minutes utilizing various Machine Learning models such as Random Forest, Linear Regress, Artificial Neural Networks and finally using XGBosst model on big data with Apache Spark. Wrangled and cleaned the data on cloud with Apache Spark and uploaded the cleaned and joined data to Amazon S3. Trained the data with kinds of machine learning model to predict the profit. Data visualization on the prediction. Achieved 90% of accuracy by XGboost model finally!',
+    media: 'crypto.jpeg',
+    url: 'https://github.com/ShiweiGe1999/Exploration-and-Predictive-Analysis-of-Cryptocurrency-Trading-with-Binance-History-Data',
+  },
+  {
     title: 'Programmable Environmental Chamber',
     content:
       'A hybrid project among Computer science, Electrical Engineering and Mechanical Engineering finished by a team of 8. Making a real huge environmental chamber from scratch and connect electrical power, then created a website with a back-end connecting to Arduino to control the Humidity, fan speed, light intensity, light color and temperature in the chamber. It takes a year to finish the project.',
     media: 'chamber.jpg',
     url: 'https://www.floridatechvirtualshowroom.com/environment-chamber',
+  },
+  {
+    title: 'Yelp Camp',
+    content:
+      'EJS, Mongo DB, Express.js multipage full-stack application with passport, session, cookie. Implemented Helmet, input validation, sanitize on back-end to prevent malicious attack.',
+    media: 'yelp.png',
+    url: 'https://github.com/ShiweiGe1999/YelpCamp',
   },
   {
     title: 'Discord Bot (music bot)',
