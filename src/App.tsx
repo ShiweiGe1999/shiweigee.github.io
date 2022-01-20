@@ -374,7 +374,7 @@ function App() {
                 variant="subtitle1"
                 sx={{ color: 'text.secondary', mb: 3 }}
               >
-                Master Student Major in Mechanical Engineering, University of
+                Master Student Major in Scientific Computing (Computational Science), University of
                 Pennsylvania
               </Typography>
             </Grow>
@@ -474,7 +474,7 @@ function App() {
                         University of Pennsylvania
                       </Typography>
                       <Typography sx={{ color: 'text.secondary' }}>
-                        Master of Science in Mechanical Engineering
+                        Master of Science in Scientific Computing (Computational Science)
                       </Typography>
                     </TimelineContent>
                   </TimelineItem>
