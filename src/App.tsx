@@ -249,7 +249,7 @@ function App() {
           }}
         >
           <Avatar
-            src="./avatarme.JPEG"
+            src="./self.png"
             sx={{ width: '160px', height: '150px', mb: 2 }}
           />
           <Typography
@@ -374,8 +374,8 @@ function App() {
                 variant="subtitle1"
                 sx={{ color: 'text.secondary', mb: 3 }}
               >
-                Master Student Major in Mechanical Engineering, University of
-                Pennsylvania
+                Master Student Major in Scientific Computing (Computational
+                Science), University of Pennsylvania
               </Typography>
             </Grow>
             <Grow
@@ -454,7 +454,42 @@ function App() {
                   <TimelineItem>
                     <TimelineOppositeContent
                       sx={{ m: 'auto 0' }}
-                      align="right"
+                      variant="body2"
+                      color="text.secondary"
+                    >
+                      2022/05 - 2022/08
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineConnector />
+                      <img
+                        alt="fl"
+                        src="amazon.png"
+                        style={{
+                          marginTop: '1rem',
+                          marginBottom: '1rem',
+                          width: '50px',
+                          height: '50px',
+                        }}
+                      />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ py: '12px', px: 2 }}>
+                      <Typography variant="h6" component="span">
+                        Amazon
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary' }}>
+                        Front End Engneer Intern
+                      </Typography>
+                    </TimelineContent>
+                  </TimelineItem>
+                </Grow>
+                <Grow
+                  in={!isMobile ? experienceInView : true}
+                  style={{ transformOrigin: '0 0 0' }}
+                >
+                  <TimelineItem>
+                    <TimelineOppositeContent
+                      sx={{ m: 'auto 0' }}
                       variant="body2"
                       color="text.secondary"
                     >
@@ -474,7 +509,7 @@ function App() {
                         University of Pennsylvania
                       </Typography>
                       <Typography sx={{ color: 'text.secondary' }}>
-                        Master of Science in Mechanical Engineering
+                        MS in Computational Science
                       </Typography>
                     </TimelineContent>
                   </TimelineItem>
@@ -538,7 +573,7 @@ function App() {
                         Florida Institute of Technology
                       </Typography>
                       <Typography sx={{ color: 'text.secondary' }}>
-                        Bachelor of Science in Mechanical Engineering
+                        BS in Mechanical Engineering
                       </Typography>
                     </TimelineContent>
                   </TimelineItem>
@@ -571,7 +606,7 @@ function App() {
                         Wuhan Institute of Technology
                       </Typography>
                       <Typography sx={{ color: 'text.secondary' }}>
-                        Bachelor of Science in Energy and Power
+                        BS in Energy and Power
                       </Typography>
                     </TimelineContent>
                   </TimelineItem>
