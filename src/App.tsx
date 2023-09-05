@@ -249,14 +249,14 @@ function App() {
           }}
         >
           <Avatar
-            src="./self.png"
+            src="./self.jpg"
             sx={{ width: '160px', height: '150px', mb: 2 }}
           />
           <Typography
             variant="h6"
             sx={[
               {
-                fontWeight: (theme) => theme.typography.fontWeightBold,
+                fontWeight: (theme: any) => theme.typography.fontWeightBold,
                 color: 'white',
                 letterSpacing: '0.05rem',
                 mb: 1.5,
@@ -356,12 +356,12 @@ function App() {
                   color: 'text.secondary',
                 }}
               >
-                4815 PAGOSA SPRING CIR | FLORIDA, FL 32901·
+                Seattle, WA 98105·
                 <a
                   href="mailto:ajie4095@gmail.com"
                   style={{ color: theme.palette.primary.main }}
                 >
-                  geshiwei@seas.upenn.edu
+                  ajie4095@gmail.com
                 </a>
               </Typography>
             </Grow>
@@ -457,6 +457,42 @@ function App() {
                       variant="body2"
                       color="text.secondary"
                     >
+                      2023/07 - Present
+                    </TimelineOppositeContent>
+                    <TimelineSeparator>
+                      <TimelineConnector />
+                      <img
+                        alt="fl"
+                        src="amazon.png"
+                        style={{
+                          marginTop: '1rem',
+                          marginBottom: '1rem',
+                          width: '50px',
+                          height: '50px',
+                        }}
+                      />
+                      <TimelineConnector />
+                    </TimelineSeparator>
+                    <TimelineContent sx={{ py: '12px', px: 2 }}>
+                      <Typography variant="h6" component="span">
+                        Amazon Web Service
+                      </Typography>
+                      <Typography sx={{ color: 'text.secondary' }}>
+                        Front End Engneer @AWS Lambda Console
+                      </Typography>
+                    </TimelineContent>
+                  </TimelineItem>
+                </Grow>
+                <Grow
+                  in={!isMobile ? experienceInView : true}
+                  style={{ transformOrigin: '0 0 0' }}
+                >
+                  <TimelineItem>
+                    <TimelineOppositeContent
+                      sx={{ m: 'auto 0' }}
+                      variant="body2"
+                      color="text.secondary"
+                    >
                       2022/05 - 2022/08
                     </TimelineOppositeContent>
                     <TimelineSeparator>
@@ -475,10 +511,10 @@ function App() {
                     </TimelineSeparator>
                     <TimelineContent sx={{ py: '12px', px: 2 }}>
                       <Typography variant="h6" component="span">
-                        Amazon
+                        Amazon Web Service
                       </Typography>
                       <Typography sx={{ color: 'text.secondary' }}>
-                        Front End Engneer Intern
+                        Front End Engneer Intern @AWS Sagemaker Data Wrangler
                       </Typography>
                     </TimelineContent>
                   </TimelineItem>
